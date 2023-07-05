@@ -2,6 +2,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import streamlit as st
 import novell
+import baa_aggro
 
 def main():
     with st.sidebar:
@@ -14,6 +15,8 @@ def main():
     tabs = st.tabs(["Novell"])
     with tabs[0]:
         novell.build()
+    with tabs[1]:
+        baa_aggro.build()
 
 if __name__ == '__main__':
     main()
