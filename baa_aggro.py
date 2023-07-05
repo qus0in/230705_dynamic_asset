@@ -11,6 +11,7 @@ def momentum_score(asset, safe=False):
     if safe:
         return history.Close.iloc[-1] / history.Close.mean()
 
+    history.index = history.index.date
     filter_mo = lambda x: history[history.index >= common.month_before(x)].Close
     score_mo = lambda x: filter_mo(x).iloc[-1] / filter_mo(x).iloc[0] - 1
     span = [1, 3, 6, 12]
