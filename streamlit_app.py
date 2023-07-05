@@ -3,6 +3,7 @@ from dateutil.relativedelta import relativedelta
 import streamlit as st
 import novell
 import baa_aggro
+import haa
 
 def main():
     with st.sidebar:
@@ -13,11 +14,13 @@ def main():
         st.session_state['base_date'] = datetime(slider_date.year, slider_date.month, 1) - relativedelta(days=1)
         # st.write(st.session_state['base_date'])
 
-    tabs = st.tabs(["Novell", "BAA 공격형"])
+    tabs = st.tabs(["Novell", "BAA 공격형", "HAA"])
     with tabs[0]:
         novell.build()
     with tabs[1]:
         baa_aggro.build()
+    with tabs[2]:
+        haa.build()
 
 if __name__ == '__main__':
     main()
