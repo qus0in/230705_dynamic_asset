@@ -1,5 +1,6 @@
 from dateutil.relativedelta import relativedelta
 import yfinance as yf
+import streamlit as st
 
 def month_before(date, months):
     return date - relativedelta(months=months)
