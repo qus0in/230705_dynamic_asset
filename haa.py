@@ -14,7 +14,7 @@ def cal_aggro():
     return common.dataframe(data, handler)
 
 def cal_safe():
-    data = [(asset.name, momentum_score(asset, safe=True, weight=False)) for asset in enums.HAASafeAsset] 
+    data = [(asset.name, common.momentum_score(asset, safe=True, weight=False)) for asset in enums.HAASafeAsset] 
     handler = lambda y : lambda x: '☔' if x <= 1 else ('☀️' if x >= y.Score[0] else '☁️')
     return common.dataframe(data, handler)
 
