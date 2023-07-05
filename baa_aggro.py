@@ -4,7 +4,7 @@ import streamlit as st
 
 def check_canary():
     for asset in enums.BAACanaryAsset:
-        if momentum_score(asset) <= 0:
+        if common.momentum_score(asset) <= 0:
             return False
     return True
 

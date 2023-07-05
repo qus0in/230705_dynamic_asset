@@ -4,7 +4,7 @@ import streamlit as st
 
 def check_canary():
     for asset in enums.HAACanaryAsset:
-        if momentum_score(asset) <= 0:
+        if common.momentum_score(asset, weight=False) <= 0:
             return False
     return True
 
