@@ -20,7 +20,7 @@ def momentum_score(asset, safe=False):
     return score
 
 def check_canary():
-    for asset in CanaryAsset:
+    for asset in enums.BAACanaryAsset:
         if momentum_score(asset) <= 0:
             return False
     return True
