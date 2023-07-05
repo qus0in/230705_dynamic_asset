@@ -4,12 +4,12 @@ import streamlit as st
 
 def momentum_score(asset, safe=False):
     base_date = st.session_state['base_date']
-    
+
     history = common.get_history(asset.name, common.month_before(12), base_date)
     if safe:
         return history.Close.iloc[-1] / history.Close.mean()
 
-    filter_mo = lambda x: history[history.index >= common.month_before(x).date()].Close
+    filter_mo = lambda x: history[history.index > common.month_before(x).date()].Close
     score_mo = lambda x: filter_mo(x).iloc[-1] / filter_mo(x).iloc[0] - 1
     span = [1, 3, 6, 12]
     score = sum([score_mo(s) * 12 / s for s in span])
