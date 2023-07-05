@@ -7,9 +7,7 @@ def momentum_score(asset, safe=False):
     base_date_mo6 = common.month_before(6)
     base_date_mo12 = common.month_before(12)
 
-    # print(asset.name)
-    ticker = yf.Ticker(asset.name)
-    history = common.get_history(common.month_before(12), base_date)
+    history = common.get_history(asset.name, common.month_before(12), base_date)
     # print(history.Close)
     if safe: return history.Close.iloc[-1] / history.Close.mean()
     history.index = history.index.date
