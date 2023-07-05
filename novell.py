@@ -1,21 +1,21 @@
 # 채권동적자산배분
 # * 3개 : SHY, IEF, TLT, TIP, LQD, HYG, BWX, EMB
 
-import yfinance as yf
 import enums
+import common
 import pandas as pd
 import streamlit as st
-from dateutil.relativedelta import relativedelta
 
 def build():
-    fday = st.session['base_date']
-    fday_6mon = fday - relativedelta(months=6)
+    base_date = st.session['base_date']
+    base_date_mo6 = common.month_before(6)
+    base_date_mo12 = common.month_before(12)
+
     data = []
     for v in enums.NovellAsset:
         ticker = v.name
-        history = yf.Ticker(ticker).history(start=fday_6mon, end=fday)
-        history.index = history.index.date
-        history = history[(history.index >= fday_6mon.date()) & (history.index < fday.date())]
+        history = common.get_history(ticker, base_date_mo12, base_date)
+        history = history[(history.index >= base_date_mo6.date()) & (history.index < base_date.date())]
         earn = history.Close[-1] / history.Close[0] - 1
         data.append([ticker, earn])
 
