@@ -11,7 +11,7 @@ def main():
         st.subheader(f"{slider_date.year}년 {slider_date.month}월")
         st.session_state['base_date'] = datetime(slider_date.year, slider_date.month, 1)
 
-    tabs = ["Novell"]
+    tabs = st.tabs(["Novell"])
     with tabs[0]:
         novell.build()
 
