@@ -7,7 +7,7 @@ import pandas as pd
 import streamlit as st
 
 def build():
-    base_date = st.session['base_date']
+    base_date = st.session_state['base_date']
     base_date_mo6 = common.month_before(6)
     base_date_mo12 = common.month_before(12)
 
