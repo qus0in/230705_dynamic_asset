@@ -6,7 +6,7 @@ import novell
 def main():
     with st.sidebar:
         label = "기준월"
-        month_slider = st.slider(label, min_value=0, max_value=12, value=0, step=1, format="%d개월 전".format)
+        month_slider = st.slider(label, min_value=0, max_value=12, value=0, step=1, format="%d개월 전")
         base_date = datetime.today() - relativedelta(months=month_slider)
         st.subheader(f"{base_date.year}년 {base_date.month}월")
         st.session['base_date'] = datetime(today.year, today.month, 1)
