@@ -26,39 +26,24 @@ def check_canary():
     return True
 
 def cal_aggro():
-    aggro = pd.DataFrame(
-        [(asset.name, momentum_score(asset))
-        for asset in AggroAsset],
-        columns=['Ticker', 'Score']
-    ).sort_values('Score', ascending=False
-    ).set_index('Ticker')
-    aggro['Sign'] = aggro.Score.apply(
-        lambda x: '😭' if x <= 0 else ('👑' if x >= aggro.Score[0] else '😶‍🌫️'))
-    return aggro
+    data = [(asset.name, momentum_score(asset)) for asset in enums.BAAAggroAsset] 
+    handler = lambda y : lambda x: '😭' if x <= 0 else ('👑' if x >= y.Score[0] else '😶‍🌫️')
+    return common.dataframe(data, handler)
 
 def cal_safe():
-    safe = pd.DataFrame(
-        [(asset.name, momentum_score(asset, True))
-        for asset in SafeAsset],
-        columns=['Ticker', 'Score']
-    ).sort_values('Score', ascending=False
-    ).set_index('Ticker')
-    safe['Sign'] = safe.Score.apply(
-        lambda x: '☔' if x <= 1 else ('☀️' if x >= safe.Score[2] else '☁️'))
-    return safe
+    data = [(asset.name, momentum_score(asset)) for asset in enums.BAASafeAsset] 
+    handler = lambda y : lambda x: '☔' if x <= 1 else ('☀️' if x >= y.Score[2] else '☁️'))
+    return common.dataframe(data, handler)
 
 def build():
-    df = None
-    if check_canary():
-        df = cal_aggro()
-    else:
-        df = cal_safe()
-
     st.write("""
     ## BAA 공격형
     * 1개 : QQQ, VEA, VWO, BND
     * 3개 : TIP, PDBC, IEF, TLT, LQD, BND
     """)
-    st.dataframe(df)
+    if check_canary():
+        cal_aggro()
+    else:
+        cal_safe()
     
 main()
