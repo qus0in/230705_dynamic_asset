@@ -32,7 +32,7 @@ def cal_aggro():
 
 def cal_safe():
     data = [(asset.name, momentum_score(asset)) for asset in enums.BAASafeAsset] 
-    handler = lambda y : lambda x: '☔' if x <= 1 else ('☀️' if x >= y.Score[2] else '☁️'))
+    handler = lambda y : lambda x: '☔' if x <= 1 else ('☀️' if x >= y.Score[2] else '☁️')
     return common.dataframe(data, handler)
 
 def build():
