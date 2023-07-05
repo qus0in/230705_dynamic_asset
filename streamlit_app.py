@@ -1,7 +1,10 @@
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import streamlit as st
-import widget
+
+import novell
+import baa_aggro
+import haa
 
 def main():
     with st.sidebar:
@@ -14,11 +17,11 @@ def main():
 
     tabs = st.tabs(["Novell", "BAA 공격형", "HAA"])
     with tabs[0]:
-        widget.novell.build()
+        novell.build()
     with tabs[1]:
-        widget.baa_aggro.build()
+        baa_aggro.build()
     with tabs[2]:
-        widget.haa.build()
+        haa.build()
 
 if __name__ == '__main__':
     main()
