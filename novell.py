@@ -39,4 +39,4 @@ def build():
     df.sort_values('Score', ascending=False, inplace=True)
     df.set_index('Ticker', drop=True, inplace=True)
     df['Sign'] = df.Score.apply(lambda x: '😭' if x < 0 else ('🤗' if x >= df.Score[2] else '😶‍🌫️'))
-    
+    st.dataframe(df)
