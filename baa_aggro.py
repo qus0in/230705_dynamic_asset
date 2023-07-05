@@ -45,5 +45,3 @@ def build():
         cal_aggro()
     else:
         cal_safe()
-    
-main()
