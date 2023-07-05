@@ -7,6 +7,10 @@ import baa_aggro
 import haa
 
 def main():
+    st.set_page_config(
+        page_title="동적자산배분 대시보드",
+        page_icon="🎬",
+    )
     with st.sidebar:
         label = "기준월"
         month_slider = st.slider(label, min_value=0, max_value=12, value=0, step=1, format="%d개월 전")
@@ -14,8 +18,10 @@ def main():
         st.subheader(f"{slider_date.year}년 {slider_date.month}월")
         st.session_state['base_date'] = datetime(slider_date.year, slider_date.month, 1) - relativedelta(days=1)
         # st.write(st.session_state['base_date'])
+    
+    st.title("🎬 동적자산배분 대시보드")
 
-    tabs = st.tabs(["Novell", "BAA 공격형", "HAA"])
+    tabs = st.tabs(["🧑‍💼 Novell", "🪖 BAA 공격형", "🕺 HAA"])
     with tabs[0]:
         novell.build()
     with tabs[1]:
