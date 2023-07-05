@@ -2,32 +2,16 @@
 # * 3개 : SHY, IEF, TLT, TIP, LQD, HYG, BWX, EMB
 
 import yfinance as yf
-from enum import Enum, auto
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
+import enums
 import pandas as pd
 import streamlit as st
-
-class Asset(Enum):
-    SHY = auto()
-    IEF = auto()
-    TLT = auto()
-    TIP = auto()
-    LQD = auto()
-    HYG = auto()
-    BWX = auto()
-    EMB = auto()
+from dateutil.relativedelta import relativedelta
 
 def build():
-    pd.options.display.float_format = '{:.3f}'.format
-    slider = 0
-    today = datetime.today() - relativedelta(months=slider)
-    fday = datetime(today.year, today.month, 1)
+    fday = st.session['base_date']
     fday_6mon = fday - relativedelta(months=6)
-    print(f"{fday.year}년 {fday.month}월")
-
     data = []
-    for v in Asset:
+    for v in enums.NovellAsset:
         ticker = v.name
         history = yf.Ticker(ticker).history(start=fday_6mon, end=fday)
         history.index = history.index.date
