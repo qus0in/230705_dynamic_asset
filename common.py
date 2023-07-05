@@ -1,4 +1,5 @@
 from dateutil.relativedelta import relativedelta
+import pandas as pd
 import yfinance as yf
 import streamlit as st
 
@@ -15,5 +16,5 @@ def dataframe(data, sign_handler):
     df = pd.DataFrame(data, columns=['Ticker', 'Score'])
     df.sort_values('Score', ascending=False, inplace=True)
     df.set_index('Ticker', drop=True, inplace=True)
-    df['Sign'] = df.Score.apply(sign_handler)
+    df['Sign'] = df.Score.apply(sign_handler(df))
     st.dataframe(df)

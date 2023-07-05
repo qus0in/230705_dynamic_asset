@@ -1,9 +1,5 @@
-# 채권동적자산배분
-# * 3개 : SHY, IEF, TLT, TIP, LQD, HYG, BWX, EMB
-
 import enums
 import common
-import pandas as pd
 import streamlit as st
 
 def build():
@@ -18,5 +14,8 @@ def build():
         history = history[(history.index >= base_date_mo6.date()) & (history.index < base_date.date())]
         earn = history.Close[-1] / history.Close[0] - 1
         data.append([ticker, earn])
-
-    common.dataframe(data, lambda x: '😭' if x < 0 else ('🤗' if x >= df.Score[2] else '😶‍🌫️'))
+    st.write("""
+    ## 채권동적자산배분
+    * 3개 : SHY, IEF, TLT, TIP, LQD, HYG, BWX, EMB 
+    """)
+    common.dataframe(data, lambda y: lambda x: '😭' if x < 0 else ('🤗' if x >= y.Score[2] else '😶‍🌫️'))
